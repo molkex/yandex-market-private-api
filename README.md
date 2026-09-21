@@ -7,13 +7,33 @@ High-performance, pure-HTTP, zero-device client for Yandex Market (`ru.yandex.bl
 [![Python: >=3.9](https://img.shields.io/badge/Python->=3.9-3776ab.svg)](#)
 [![Platforms: iOS & Android](https://img.shields.io/badge/Platforms-iOS%20%26%20Android%20Dual--Engine-orange.svg)](#)
 [![Zero Device: 100% Headless](https://img.shields.io/badge/Device-Zero--Device%20Pure--HTTP-blueviolet.svg)](#)
-[![Protocol: FAPI & DivKit SDUI](https://img.shields.io/badge/Protocol-FAPI%20%26%20DivKit%20SDUI-2563eb.svg)](#)
+[![Web Dashboard: Interactive UI](https://img.shields.io/badge/Web%20Dashboard-Interactive%20UI-06b6d4.svg)](#)
 [![Telegram Contact](https://img.shields.io/badge/Telegram-@mxmtkchk-229ED9.svg)](https://t.me/mxmtkchk)
 
 > **Family Suite**:
 > - [threads-private-api](https://github.com/molkex/threads-private-api) — Unofficial Threads Private API & Trend Radar SDK.
 > - [instagram-private-api](https://github.com/molkex/instagram-private-api) — Pure HTTP/2 zero-device Instagram automation engine.
 > - [tiktok-private-api](https://github.com/molkex/tiktok-private-api) — Unofficial TikTok Private API & Feed Ingestion engine.
+
+---
+
+## Interactive Web Dashboard & Lead Magnet
+
+Run the embedded zero-device web dashboard with a single command to search goods, inspect real-time warehouse inventory, and check B2B referral rewards in an interactive UI:
+
+```bash
+# Launch via standalone launcher
+python run_web.py
+
+# Or via package module
+python -m openyamarket --web
+```
+
+Open **`http://localhost:8000`** in your browser:
+- **Instant Search**: Search products across Russian regions (Moscow, SPb, Kazan, etc.) with sub-100ms response times.
+- **Warehouse X-Ray**: Uncover hidden stock levels (`stock_amount`) before sellers exhaust inventory.
+- **Affiliate & B2B Radar**: View side-by-side comparisons of regular Yandex Plus rewards vs. elevated B2B cash payouts for Self-Employed (Самозанятые) / IP.
+- **1-Click Referral Generator**: Generate clean sharing URLs without heavy tracking overhead.
 
 ---
 

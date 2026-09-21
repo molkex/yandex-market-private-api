@@ -47,11 +47,20 @@ fast = [
 crypto = [
     "cryptography>=41.0.0"
 ]
+web = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0"
+]
 full = [
     "brotli>=1.0.9",
     "curl_cffi>=0.7.0",
-    "cryptography>=41.0.0"
+    "cryptography>=41.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0"
 ]
+
+[project.scripts]
+openyamarket = "openyamarket.__main__:main"
 
 [project.urls]
 Homepage = "https://github.com/molkex/yandex-market-private-api"
