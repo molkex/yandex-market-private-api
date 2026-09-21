@@ -1,0 +1,5 @@
+# Zero required external dependencies! Standard library http.client works out of the box.
+# Optional high-performance packages:
+# brotli>=1.0.9
+# curl_cffi>=0.7.0
+# cryptography>=41.0.0
