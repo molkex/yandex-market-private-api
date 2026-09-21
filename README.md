@@ -19,6 +19,8 @@ High-performance, pure-HTTP, zero-device client for Yandex Market (`ru.yandex.bl
 
 ## Interactive Web Dashboard & Lead Magnet
 
+![openYaMarket Web Dashboard](docs/dashboard_preview.png)
+
 Run the embedded zero-device web dashboard with a single command to search goods, inspect real-time warehouse inventory, and check B2B referral rewards in an interactive UI:
 
 ```bash
