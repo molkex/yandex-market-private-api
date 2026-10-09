@@ -148,16 +148,20 @@ print(f"Card loaded. Broken: {card.get('_broken')}")
 ```python
 from openyamarket import IOSClient
 
-# An authenticated client accesses account-tailored affiliate promises
-client = IOSClient(oauth_token="AQAAAAA...")
+# The referral reward is account-scoped: the SAME product pays a higher reward
+# to a Self-Employed/ИП business-enrolled account than to a regular (B2C) one.
+# It is one field (shareContext.promise), not two — query with each token.
 
-# Extract referral link and rewards
-ref = client.referral_share("6257253212")
+b2c = IOSClient(oauth_token="AQAAAAA...")          # regular account
+b2b = IOSClient(oauth_token="AQAAAAA..._business")  # Самозанятый / ИП account
 
-print(f"Standard Reward: {ref['bonus']} ₽")
-print(f"B2B Reward (Самозанятые / ИП): {ref['b2b_bonus']} ₽")   # None on a B2C account
-print(f"B2B Card Link: {ref['b2b_url']}")                       # always present
-print(f"Working Referral Link: {ref['referral_url']}")
+base = b2c.referral_share("6257253212")
+elevated = b2b.referral_share("6257253212")
+
+print(f"Base reward (B2C):      {base['bonus']}")       # e.g. 3000
+print(f"Elevated reward (СЗ/ИП): {elevated['bonus']}")  # e.g. 6000
+print(f"B2B card link:          {base['b2b_url']}")     # always present
+print(f"Referral link:          {base['referral_url']}")
 ```
 
 ### 3. Cart & RemoteAction Execution
