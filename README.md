@@ -28,7 +28,7 @@ Included in the licensed build — a local zero-device web dashboard to search g
 
 - **Instant Search**: Search products across Russian regions (Moscow, SPb, Kazan, etc.) with sub-100ms response times.
 - **Warehouse X-Ray**: Uncover hidden stock levels (`stock_amount`) before sellers exhaust inventory.
-- **Affiliate & B2B Radar**: View side-by-side comparisons of regular Yandex Plus rewards vs. elevated B2B cash payouts for Self-Employed (Самозанятые) / IP.
+- **Affiliate & B2B Radar**: Regular Yandex Plus referral points plus the business (B2B) card link for every product. The *elevated B2B reward value* is shown only when the session's account is enrolled as Self-Employed (Самозанятый) / ИП — otherwise it is left blank, never estimated.
 - **1-Click Referral Generator**: Generate clean sharing URLs without heavy tracking overhead.
 
 ![SKU X-Ray](docs/sku_xray_preview.png)
@@ -41,7 +41,7 @@ Included in the licensed build — a local zero-device web dashboard to search g
 |:---|:---|:---|:---|
 | **Access & Verification** | Mandatory legal entity (IP/OOO), seller contract | No approval needed | **Zero approval / Zero setup needed** |
 | **Search Buyer Catalog** | Restricted / No public buyer search | Brittle DOM selectors & high CPU | **Sub-50ms Native Wire-Speed Search** |
-| **Referral & B2B Bonuses** | Not available | Hidden behind dynamic DivKit popups | **Direct JSON extraction (standard & B2B rewards)** |
+| **Referral & B2B Bonuses** | Not available | Hidden behind dynamic DivKit popups | **Direct JSON extraction (base reward points + B2B card link; B2B reward value with a СЗ/ИП account)** |
 | **RAM per Worker** | Minimal (Cloud API) | 2 - 4 GB per browser instance | **< 25 MB (Standard library HTTP)** |
 | **Captcha & Anti-Bot** | Rate-limited API keys | Severe SmartCaptcha & Cloudflare blocks | **Authentic mobile fingerprints & JA3/JA4 TLS** |
 | **Cart & Checkout Actions** | Seller inventory management only | Fragile mouse/touch emulation | **Native RemoteAction execution engine** |
@@ -55,7 +55,7 @@ Included in the licensed build — a local zero-device web dashboard to search g
   - **iOS**: Emulates `ru.yandex.blue.market` v2026.32.7 on iPhone (iPhone 7 Plus, 13, 14 Pro Max; iOS 15–18) with Apple AppStore tracks.
   - **Android**: Emulates `ru.beru.android` v2026.32.3 on Samsung Galaxy A34, Google Pixel 7, and Xiaomi with RuStore tracks.
 - **DivKit Server-Driven UI (SDUI) Parser**: Pulls clean structured products, prices, badges, and filters out of complex DivKit response blobs without requiring heavy UI rendering.
-- **Referral Radar & B2B Profit Hunter**: Instantly retrieves affiliate link parameters, personal referral codes, base rewards, and the elevated B2B reward for Self-Employed (Самозанятые), IP, and OOO.
+- **Referral Radar & B2B Link Extractor**: Instantly retrieves affiliate link parameters, personal referral codes, base reward points, and the business (B2B) card link. The elevated B2B reward *value* is returned only for a Self-Employed (Самозанятый) / ИП-enrolled account; on a regular (B2C) account it is `None` (never a fabricated estimate).
 - **Full E-Commerce Operations**:
   - Catalog tree navigation (`root-catalog`, `category`, `department`)
   - Fast search with price range filtering and server-side attributes
@@ -155,7 +155,8 @@ client = IOSClient(oauth_token="AQAAAAA...")
 ref = client.referral_share("6257253212")
 
 print(f"Standard Reward: {ref['bonus']} ₽")
-print(f"B2B Reward (Самозанятые / ИП): {ref['b2b_bonus']} ₽")
+print(f"B2B Reward (Самозанятые / ИП): {ref['b2b_bonus']} ₽")   # None on a B2C account
+print(f"B2B Card Link: {ref['b2b_url']}")                       # always present
 print(f"Working Referral Link: {ref['referral_url']}")
 ```
 
@@ -217,7 +218,7 @@ print(f"Registered UID {session['uid']}, Token: {token}")
 | **Search** | `search_filtered(text, filters)` | Native server-side filter evaluation | ❌ |
 | **Product** | `product(sku_id)` | Fetch full product card screen | ❌ |
 | **Product** | `product_reviews(sku_id)` | Retrieve customer reviews and ratings | ❌ |
-| **Affiliate** | `referral_share(sku_id)` | Extract referral link, base bonus, and B2B reward | ✅ |
+| **Affiliate** | `referral_share(sku_id)` | Referral link + base points + B2B card link; B2B reward value needs a СЗ/ИП account | ✅ |
 | **Cart** | `cart()` | Fetch user cart screen | ✅ |
 | **Cart** | `add_to_cart(sku_id)` | Add buybox offer to cart | ✅ |
 | **Cart** | `remove_from_cart(sku_id)` | Remove specific item from cart | ✅ |
