@@ -15,3 +15,16 @@ venv/
 .vscode/
 *.log
 .DS_Store
+
+# добавлено перед переносом в Manager
+.env.*
+!.env.example
+*.env.bak*
+.env.bak*
+*.session
+*.session-journal
+WB.json
+github_upload_instructions.txt
+node_modules/
+.venv/
+*.pyc
